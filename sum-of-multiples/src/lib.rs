@@ -2,27 +2,26 @@ extern crate itertools;
 use itertools::Itertools;
 
 pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
-    let min_factor = factors.iter().min();
-    match min_factor {
-        Some(min) if limit < *min || limit == 0 => 0,
-        None => 0,
-        Some(_) => sum_of_multiples_impl(limit, factors),
+    if factors.len() == 0 {
+        0
+    } else {
+        factors
+            .iter()
+            .filter_map(|factor| {
+                if has_no_valid_multiples(limit, factor) {
+                    None
+                } else {
+                    Some(multiples(limit, factor))
+                }
+            })
+            .flatten()
+            .unique()
+            .sum()
     }
 }
 
-fn sum_of_multiples_impl(limit: u32, factors: &[u32]) -> u32 {
-    factors
-        .iter()
-        .filter_map(|factor| {
-            if limit < *factor || *factor == 0 {
-                None
-            } else {
-                Some(multiples(limit, factor))
-            }
-        })
-        .flatten()
-        .unique()
-        .sum()
+fn has_no_valid_multiples(limit: u32, factor: &u32) -> bool {
+    limit < *factor || *factor == 0
 }
 
 fn multiples<'a>(limit: u32, factor: &'a u32) -> Box<Iterator<Item = u32> + 'a> {
