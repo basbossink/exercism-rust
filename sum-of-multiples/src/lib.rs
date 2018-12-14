@@ -1,5 +1,7 @@
 extern crate itertools;
+extern crate num_integer;
 use itertools::Itertools;
+use num_integer::Integer;
 
 pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
     if factors.len() == 0 {
@@ -25,10 +27,11 @@ fn has_no_valid_multiples(limit: u32, factor: &u32) -> bool {
 }
 
 fn multiples<'a>(limit: u32, factor: &'a u32) -> Box<Iterator<Item = u32> + 'a> {
-    let upper = if limit % factor == 0 {
-        (limit / factor) - 1
+    let (quotient, remainder) = limit.div_rem(factor);
+    let upper = if remainder == 0 {
+        quotient - 1
     } else {
-        (limit / factor)
+        quotient
     };
     Box::new((0..upper).map(move |i| (i + 1) * *factor))
 }
