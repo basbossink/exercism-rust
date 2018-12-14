@@ -2,5 +2,6 @@
 name = "nth_prime"
 version = "1.0.0"
 authors = ["sacherjj <sacherjj@gmail.com>"]
+edition = "2018"
 
 [dependencies]
