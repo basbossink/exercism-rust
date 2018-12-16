@@ -63,7 +63,7 @@ mod tests {
 
     #[test]
     fn test_sieve() {
-        let expected = vec![2u32, 3, 5, 7, 11, 13, 17, 19, 23, 29];
-        assert_eq!(expected, primes_upto(30));
+        let expected = vec![2u32, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
+        assert_eq!(expected, primes_upto(50));
     }
 }
