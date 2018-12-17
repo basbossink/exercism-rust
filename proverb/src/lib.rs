@@ -1,3 +1,11 @@
 pub fn build_proverb(list: &[&str]) -> String {
-    unimplemented!("build a proverb from this list of items: {:?}", list)
+    let mut lines = String::new();
+    if 0 < list.len() {
+        let pairs = list.iter().zip(list.iter().skip(1));
+        for (fst, sec) in pairs {
+            lines.push_str(&format!("For want of a {} the {} was lost.\n", fst, sec));
+        }
+        lines.push_str(&format!("And all for the want of a {}.", list[0]));
+    }
+    lines
 }
