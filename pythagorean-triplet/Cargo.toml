@@ -1,4 +1,5 @@
 [dependencies]
+num-integer = "0.1"
 
 [package]
 name = "pythagorean_triplet"
